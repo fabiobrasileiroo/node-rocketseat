@@ -1,0 +1,10 @@
+GET http://localhost:3333/users
+
+###
+POST http://localhost:3333/users
+###
+PUT http://localhost:3333/users
+###
+DELETE http://localhost:3333/users
+
+
