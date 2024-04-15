@@ -34,7 +34,7 @@ const server = http.createServer((req, res) => {
 })
 
 server.listen(3333)
-
+```
 
 
 ## O que são streams em Node.js
