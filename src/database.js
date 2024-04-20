@@ -33,4 +33,16 @@ export class Database {
     this.#persist()
     return data;
   }
+
+  delete(table,id) {
+    const rowIndex =  this.#database[table].findIndex(row => row.id === id)
+
+    if(rowIndex > -1) {
+      this.#database[table].slice(rowIndex, 1)
+      this.#persist()
+    } else {
+      console.log('nao encontrado entao -1')
+    }
+
+  }
 }
