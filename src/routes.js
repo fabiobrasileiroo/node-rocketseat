@@ -9,7 +9,13 @@ export const routes = [
     method: 'GET',
     path: buildRoutePath('/users'),
     handler: (req, res) => {
-      const users = database.select('users')
+      const { search } = req.query
+
+      const users = database.select('users', search ?{
+        name: search,
+        email: search,
+      }: null
+    )
 
       return res.end(JSON.stringify(users))
     }
@@ -18,7 +24,6 @@ export const routes = [
     method: 'POST',
     path: buildRoutePath('/users'),
     handler: (req, res) => {
-
       const { name, email } = req.body
       const user = {
         id: randomUUID(),
@@ -29,6 +34,22 @@ export const routes = [
       database.insert('users', user)
       return res.writeHead(201).end('Criação de usuário')
     }
+  },
+
+  {
+    method: 'PUT',
+    path: buildRoutePath('/users/:id'),
+    handler: (req, res) => {
+
+      const { id } = req.params
+      const {name, email } = req.body 
+      database.update('users', id, {
+        name,
+        email
+      })
+
+      return res.writeHead(204).end()
+    },
   },
   {
     method: 'DELETE',
